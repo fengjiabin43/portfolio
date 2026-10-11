@@ -270,7 +270,7 @@ const WorkCard = ({ project, onClick }: { project: any, onClick: () => void }) =
       animate={{ rotateX, rotateY }}
       transition={{ type: "spring", stiffness: 300, damping: 30, mass: 0.5 }}
       style={{ transformStyle: "preserve-3d" }}
-      className="relative w-full h-[400px] rounded-2xl cursor-pointer group bg-zinc-900/50 border border-white/5"
+      className={`group relative w-full cursor-pointer rounded-2xl border border-white/5 bg-zinc-900/50 ${project.cardSizeClass || 'h-[400px] sm:h-[420px] xl:h-[440px]'}`}
     >
       {/* Spotlight Border */}
       {isHovered && (
@@ -307,10 +307,10 @@ const WorkCard = ({ project, onClick }: { project: any, onClick: () => void }) =
         </div>
       )}
 
-      <div className={`absolute inset-0 z-10 flex flex-col justify-end rounded-2xl bg-gradient-to-t p-8 ${project.cardOverlayClass || 'from-[#050505] via-[#050505]/80 to-transparent'}`} style={{ transform: "translateZ(30px)" }}>
-        <h3 className="text-2xl font-bold text-white mb-2 font-sans">{project.title}</h3>
-        <div className="font-mono text-xs mb-2 tracking-widest" style={{ color: project.color }}>{project.tag}</div>
-        <p className="text-zinc-400 text-sm line-clamp-2 font-mono">{project.desc}</p>
+      <div className={`absolute inset-0 z-10 flex flex-col justify-end rounded-2xl bg-gradient-to-t p-6 sm:p-7 ${project.cardOverlayClass || 'from-[#050505] via-[#050505]/80 to-transparent'}`} style={{ transform: "translateZ(30px)" }}>
+        <h3 className="mb-2 font-sans text-2xl font-bold leading-tight text-white">{project.title}</h3>
+        <div className="mb-2 font-mono text-xs leading-5 tracking-widest" style={{ color: project.color }}>{project.tag}</div>
+        <p className="line-clamp-2 font-mono text-sm leading-6 text-zinc-400">{project.desc}</p>
       </div>
     </motion.div>
   );
@@ -421,6 +421,7 @@ export default function App() {
       imagePosition: "top",
       cardImageClass: "opacity-80 group-hover:opacity-100",
       cardOverlayClass: "from-[#050505] via-[#050505]/40 to-transparent",
+      cardSizeClass: "h-[420px] sm:h-[440px] xl:h-[460px]",
       desc: "把衣橱装进手机，让 AI 根据天气、场合和个人偏好完成推荐与虚拟试穿。",
       image: publicAsset("aiootd-poster.png"),
       link: "https://aiootd.vip/",
@@ -436,6 +437,7 @@ export default function App() {
       imageFit: "cover",
       cardImageClass: "opacity-90 brightness-110 group-hover:opacity-100",
       cardOverlayClass: "from-[#050505] via-[#050505]/35 to-transparent",
+      cardSizeClass: "h-[420px] sm:h-[440px] xl:h-[460px]",
       desc: "独立操盘泰国男装店铺，用选品、内容与促销跑通从曝光到成交的经营闭环。",
       image: publicAsset("tiktok-commerce-showcase.png"),
     },
@@ -581,12 +583,12 @@ export default function App() {
       </section>
 
       {/* About Section */}
-      <section id="about-section" className="relative z-10 max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+      <section id="about-section" className="relative z-10 px-5 py-14 md:px-8 md:py-16 xl:px-12">
+        <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-12 lg:grid-cols-12 xl:gap-16">
           
           {/* Left: Sticky Profile */}
           <div className="lg:col-span-4">
-            <div className="sticky top-32 space-y-8">
+            <div className="sticky top-24 space-y-7">
               <div className="relative h-48 w-48 overflow-hidden rounded-2xl glass p-2">
                 <img 
                   src="https://i.postimg.cc/S2MfBfpp/image.png"
@@ -596,8 +598,8 @@ export default function App() {
               </div>
               
               <div>
-                <h2 className="text-3xl font-bold mb-4 font-sans">关于我</h2>
-                <p className="text-zinc-400 leading-relaxed font-mono text-sm">
+                <h2 className="mb-3 font-sans text-3xl font-bold leading-tight">关于我</h2>
+                <p className="font-mono text-sm leading-7 text-zinc-400">
                   暨南大学硕士在读，华农双一流本科。正在探索 AI 与商业的边界，用 Vibe Coding 将想法转化为真实产品。具备大厂业务 sense 与独立开发落地能力。
                 </p>
               </div>
@@ -635,10 +637,10 @@ export default function App() {
           </div>
 
           {/* Right: Timeline */}
-          <div className="lg:col-span-8 space-y-12">
-            <h2 className="text-3xl font-bold mb-12 font-sans">教育经历</h2>
+          <div className="lg:col-span-8">
+            <h2 className="mb-8 font-sans text-3xl font-bold leading-tight md:mb-10">教育经历</h2>
             
-            <div className="relative border-l border-zinc-800 pl-8 space-y-16">
+            <div className="relative space-y-6 border-l border-zinc-800 pl-6 md:pl-8">
               {[
                 { 
                   school: "暨南大学", 
@@ -660,13 +662,13 @@ export default function App() {
                   initial={{ opacity: 0, y: 36 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
-                  className="relative glass p-6 rounded-2xl hover:bg-white/5 transition-colors group"
+                  className="group glass relative rounded-2xl p-5 transition-colors hover:bg-white/5 md:p-6"
                 >
                   <div className="absolute -left-[41px] top-6 w-4 h-4 rounded-full bg-zinc-900 border-2 border-zinc-700 group-hover:border-sky-400 group-hover:shadow-[0_0_10px_rgba(56,189,248,0.5)] transition-all duration-300" />
-                  <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2">
-                    <div className="flex items-center gap-3">
-                      <h3 className="text-xl font-bold font-sans">{edu.school}</h3>
-                      <div className="flex gap-2">
+                  <div className="mb-3 flex flex-col justify-between gap-3 md:flex-row md:items-center">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <h3 className="font-sans text-xl font-bold leading-tight">{edu.school}</h3>
+                      <div className="flex flex-wrap gap-2">
                         {edu.tags.map(tag => (
                           <span key={tag} className="px-2 py-0.5 text-sm font-mono glass rounded-md text-zinc-400 border-zinc-700">
                             {tag}
@@ -674,10 +676,10 @@ export default function App() {
                         ))}
                       </div>
                     </div>
-                    <span className="font-mono text-sm text-sky-400 bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/20">{edu.time}</span>
+                    <span className="w-fit shrink-0 rounded-full border border-sky-500/20 bg-sky-500/10 px-3 py-1 font-mono text-sm text-sky-400">{edu.time}</span>
                   </div>
-                  <div className="text-cyan-400 font-mono text-sm mb-4">{edu.degree}</div>
-                  <p className="text-zinc-400 text-sm leading-relaxed font-mono">{edu.desc}</p>
+                  <div className="mb-3 font-mono text-sm leading-6 text-cyan-400">{edu.degree}</div>
+                  <p className="font-mono text-sm leading-7 text-zinc-400">{edu.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -686,9 +688,10 @@ export default function App() {
       </section>
 
       {/* Internships Section */}
-      <section id="internships" className="relative z-10 max-w-7xl mx-auto px-6 py-12 border-t border-zinc-800/50">
-        <h2 className="text-3xl font-bold mb-16 text-center font-sans">实习经历</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+      <section id="internships" className="relative z-10 px-5 md:px-8 xl:px-12">
+        <div className="mx-auto max-w-[1600px] border-t border-zinc-800/50 py-14 md:py-16">
+        <h2 className="mb-10 text-center font-sans text-3xl font-bold leading-tight md:mb-12">实习经历</h2>
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {[
             {
               id: 'intern-amap',
@@ -756,18 +759,21 @@ export default function App() {
                   ...intern,
                   cardImageClass: 'opacity-70 group-hover:opacity-95',
                   cardOverlayClass: 'from-[#050505] via-[#050505]/50 to-transparent',
+                  cardSizeClass: 'h-[380px] sm:h-[400px] xl:h-[400px] 2xl:h-[420px]',
                 }} 
                 onClick={() => setSelectedProject(intern)} 
               />
             </motion.div>
           ))}
         </div>
+        </div>
       </section>
 
       {/* Work Section */}
-      <section id="projects" className="relative z-10 max-w-7xl mx-auto px-6 py-12 border-t border-zinc-800/50">
-        <h2 className="text-3xl font-bold mb-16 text-center font-sans">精选作品</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section id="projects" className="relative z-10 px-5 md:px-8 xl:px-12">
+        <div className="mx-auto max-w-[1600px] border-t border-zinc-800/50 py-14 md:py-16">
+        <h2 className="mb-10 text-center font-sans text-3xl font-bold leading-tight md:mb-12">精选作品</h2>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:gap-7">
           {projects.map((project, i) => (
             <motion.div
               key={project.id}
@@ -787,13 +793,15 @@ export default function App() {
             </motion.div>
           ))}
         </div>
+        </div>
       </section>
 
       {/* Startup Section */}
-      <section id="startup" className="relative z-10 max-w-7xl mx-auto px-6 py-12 border-t border-zinc-800/50">
-        <h2 className="text-3xl font-bold mb-16 text-center font-sans">创业实践</h2>
+      <section id="startup" className="relative z-10 px-5 md:px-8 xl:px-12">
+        <div className="mx-auto max-w-[1600px] border-t border-zinc-800/50 py-14 md:py-16">
+        <h2 className="mb-10 text-center font-sans text-3xl font-bold leading-tight md:mb-12">创业实践</h2>
         
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:gap-7">
           {startupProjects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -808,6 +816,7 @@ export default function App() {
               />
             </motion.div>
           ))}
+        </div>
         </div>
       </section>
 
